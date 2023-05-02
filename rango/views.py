@@ -28,11 +28,11 @@ def index(request):
     page_list = Page.objects.order_by('-views')[:5]
     context_dict['pages'] = page_list
     context_dict['extra'] = 'Fom the model soluctio on github'
-
-    # Server side cookies
-    context_dict['visits'] = get_server_side_cookie(request, 'visits', 1)
     # Side server side cookie funtion
     visitor_cookie_handler(request)
+    # Server side cookies
+    context_dict['visits'] = get_server_side_cookie(request, 'visits', 1)
+
     # Return response back to the user, updating any cookies that need changed.
     return render(request, 'rango/index.html', context=context_dict)
 
@@ -62,6 +62,7 @@ def show_category(request, category_name_slug):
 
     # Go render the response an return it to the client
     return render(request, 'rango/category.html', context=context_dict)
+
 
 @login_required
 def add_category(request):
@@ -230,7 +231,8 @@ def some_view(request):
 
 @login_required
 def restricted(request):
-    context_dict = {'message': "Since you're logged in, you can see this text!"}
+    context_dict = {
+        'message': "Since you're logged in, you can see this text!"}
     return render(request, 'rango/restricted.html', context=context_dict)
 
 
