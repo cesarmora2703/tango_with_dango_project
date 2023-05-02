@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
 
 # Import the categorry model
 from rango.models import Category, Page
@@ -209,3 +210,23 @@ def user_login(request):
     else:
         # No context variable to pass to the template system
         return render(request, 'rango/login.html')
+
+
+def some_view(request):
+    if not request.user.is_authenticated():
+        return HttpResponse("You are logged in.")
+    else:
+        return HttpResponse("You are not logged in.")
+
+
+@login_required
+def restricted(request):
+    return HttpResponse("Since you're logged in, you can see this text!")
+
+
+@login_required
+def user_logout(request):
+    # Since we know the user is logged in, we can now just log them out.
+    logout(request)
+    # Take the user back to the homepage.
+    return redirect(reverse('rango:index'))
