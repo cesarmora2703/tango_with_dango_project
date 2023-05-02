@@ -126,7 +126,7 @@ def add_page(request, category_name_slug):
     return render(request, 'rango/add_page.html', context=context_dict)
 
 
-def register(request):
+""" def register(request):
     '''
     A boolean value for telling the template whether the 
     registration was successful.
@@ -185,10 +185,10 @@ def register(request):
                   'rango/register.html',
                   context={'user_form': user_form,
                            'profile_form': profile_form,
-                           'registered': registered})
+                           'registered': registered}) """
 
 
-def user_login(request):
+""" def user_login(request):
     # If the request is a HTTP pOST, try to pull out the reelvant information
     if request.method == 'POST':
         # Gather the username and password provided by the user.
@@ -220,6 +220,7 @@ def user_login(request):
     else:
         # No context variable to pass to the template system
         return render(request, 'rango/login.html')
+ """
 
 
 def some_view(request):
@@ -236,12 +237,12 @@ def restricted(request):
     return render(request, 'rango/restricted.html', context=context_dict)
 
 
-@login_required
+""" @login_required
 def user_logout(request):
     # Since we know the user is logged in, we can now just log them out.
     logout(request)
     # Take the user back to the homepage.
-    return redirect(reverse('rango:index'))
+    return redirect(reverse('rango:index')) """
 
 
 def get_server_side_cookie(request, cookie, default_val=None):
