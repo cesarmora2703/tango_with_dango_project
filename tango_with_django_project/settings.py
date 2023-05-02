@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'registration',
     'rango',
 ]
 
@@ -102,7 +103,24 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+PASSWORD_HASHERS = (
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+)
+
+# If True, users can register.
+REGISTRATION_OPEN = True
+
+# If True, the user will be automatically logged in after registering.
+REGISTRATION_AUTO_LOGIN = True
+
+# The URL that Django redirects users to after logging in.
+LOGIN_REDIRECT_URL = 'rango:index'
+
+# The page users are directed to if they are not logged in.
+# This was set in a previous chapter. The registration package uses this, too.
 LOGIN_URL = 'rango:login'
+LOGIN_URL = 'auth_login'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -130,3 +148,6 @@ MEDIA_URL = 'media/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_COOKIE_AGE = 1209600
