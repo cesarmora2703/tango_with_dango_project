@@ -54,7 +54,7 @@ def show_category(request, category_name_slug):
     # Go render the response an return it to the client
     return render(request, 'rango/category.html', context=context_dict)
 
-
+@login_required
 def add_category(request):
     form = CategoryForm()
     # A HTTP POST?
@@ -221,7 +221,8 @@ def some_view(request):
 
 @login_required
 def restricted(request):
-    return HttpResponse("Since you're logged in, you can see this text!")
+    context_dict = {'message': "Since you're logged in, you can see this text!"}
+    return render(request, 'rango/restricted.html', context=context_dict)
 
 
 @login_required
